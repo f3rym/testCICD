@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # Запускать при пуше в main
+      - main  # Запускается при пуше в main
 
 permissions:
   pages: write
@@ -20,12 +20,12 @@ jobs:
       - name: Copy files to public directory
         run: |
           mkdir -p public
-          cp -r * public  # Перемещаем все файлы в папку public
+          cp -r * public  # Копируем все файлы в public/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: public  # Загружаем только содержимое public/
+          path: public  # Загружаем только файлы из папки public/
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v2
