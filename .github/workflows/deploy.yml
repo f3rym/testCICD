@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # Запускаем на пуш в main
+      - main  # Запускается при пуше в main
 
 jobs:
   deploy:
@@ -13,8 +13,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Build the project
+        run: make build  # Выполните сборку проекта (замените на вашу команду сборки)
+
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: main  # Деплоим в ветку main
-          folder: .      # Папка с файлами для деплоя (если файл в корне, указываем .)
+          branch: gh-pages  # На эту ветку будет деплоиться
+          folder: public    # Папка с файлами для деплоя (если файл в корне, можно указать .)
