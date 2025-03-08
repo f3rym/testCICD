@@ -3,21 +3,23 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # Запускается при пуше в main
+      - main  # или другая ветка, в зависимости от вашей настройки
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
 
-      - name: Build the project
-        run: make build  # Выполните сборку проекта (замените на вашу команду сборки)
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  # или другая версия Node.js, если необходимо
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages  # На эту ветку будет деплоиться
-          folder: public    # Папка с файлами для деплоя (если файл в корне, можно указать .)
+          branch: gh-pages  # на какую ветку деплоить (GitHub Pages требует ветку gh-pages)
+          folder: ./  # папка, из которой будут публиковаться файлы (корень проекта для HTML)
